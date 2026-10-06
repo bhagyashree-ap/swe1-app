@@ -1,7 +1,5 @@
 # PollApp
 
-## What the app does
-
 Built PollApp with Django. It lets users view polls, vote and see results. Admin can add and manage polls through the admin page.
 
 ## Tech stack
