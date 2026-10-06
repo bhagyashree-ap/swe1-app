@@ -1,0 +1,24 @@
+{% extends "polls/base.html" %}
+{% block title %}Poll results | PollApp{% endblock %}
+{% block content %}
+  <a class="back-link" href="{% url 'polls:index' %}">← All polls</a>
+  <section class="social-poll">
+    <header class="social-header">
+      <span class="avatar" aria-hidden="true">🗳️</span>
+      <span class="author"><strong>PollApp</strong><span>Results</span></span>
+    </header>
+    <div class="poll-content">
+      <h1 class="question-title">{{ question.question_text }}</h1>
+      <p class="question-hint">Here’s how people voted.</p>
+      {% for choice, percentage in choices_with_percentages %}
+        <div class="result-choice">
+          <span class="result-fill" style="width: max({{ percentage }}%, 28%)" aria-hidden="true"></span>
+          <span class="result-label">{{ choice.choice_text }}</span>
+          <span class="result-percentage">{{ percentage }}%</span>
+        </div>
+      {% empty %}<p class="empty-copy">No choices yet.</p>{% endfor %}
+      <p class="response-count">{{ question.total_votes }} response{{ question.total_votes|pluralize }}</p>
+      <a class="results-vote-link" href="{% url 'polls:detail' question.id %}">Vote again</a>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "polls/base.html" %}
+{% block title %}Latest polls | PollApp{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Latest polls</h1>
+    <p>Choose a question and share your answer.</p>
+  </section>
+  {% if latest_question_list %}
+    <section class="poll-list" aria-label="Latest polls">
+      {% for question in latest_question_list %}
+        <a class="poll-card" href="{% url 'polls:detail' question.id %}">
+          <span class="poll-copy">
+            <span class="poll-date">{{ question.pub_date|date:"M j, Y" }}</span>
+            <span class="poll-title">{{ question.question_text }}</span>
+            <span class="poll-action">View poll <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </a>
+      {% endfor %}
+    </section>
+  {% else %}
+    <section class="empty-state"><h2>No polls yet</h2><p>New questions will show up here.</p></section>
+  {% endif %}
+{% endblock %}
