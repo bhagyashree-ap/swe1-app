@@ -13,10 +13,12 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  - psql -c 'CREATE DATABASE pollapp_test;' -U postgres
+  - sudo service postgresql start
+  - for attempt in $(seq 1 30); do pg_isready -h 127.0.0.1 -p 5432 -U postgres && break; sleep 1; done
+  - pg_isready -h 127.0.0.1 -p 5432 -U postgres
 
 env:
-  - DATABASE_URL=postgres://postgres@localhost/pollapp_test
+  - DATABASE_URL=postgres://postgres@127.0.0.1:5432/postgres
 
 script:
   - black --check .
