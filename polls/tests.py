@@ -35,7 +35,9 @@ class PollViewsTests(TestCase):
     def test_vote_increments_choice_and_redirects(self):
         question = make_question("Favorite color?", -1)
         choice = Choice.objects.create(question=question, choice_text="Blue")
-        response = self.client.post(reverse("polls:vote", args=(question.id,)), {"choice": choice.id})
+        response = self.client.post(
+            reverse("polls:vote", args=(question.id,)), {"choice": choice.id}
+        )
         choice.refresh_from_db()
         self.assertEqual(choice.votes, 1)
         self.assertRedirects(response, reverse("polls:results", args=(question.id,)))

@@ -13,7 +13,9 @@ class IndexView(generic.ListView):
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by(
+            "-pub_date"
+        )[:5]
 
 
 class DetailView(generic.DetailView):
@@ -35,7 +37,14 @@ class ResultsView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         choices = list(context["question"].choice_set.all())
         context["choices_with_percentages"] = [
-            (choice, round(choice.votes * 100 / context["question"].total_votes) if context["question"].total_votes else 0)
+            (
+                choice,
+                (
+                    round(choice.votes * 100 / context["question"].total_votes)
+                    if context["question"].total_votes
+                    else 0
+                ),
+            )
             for choice in choices
         ]
         return context
@@ -46,10 +55,14 @@ def vote(request, question_id):
     try:
         choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
-        return render(request, "polls/detail.html", {
-            "question": question,
-            "error_message": "You didn't select a choice.",
-        })
+        return render(
+            request,
+            "polls/detail.html",
+            {
+                "question": question,
+                "error_message": "You didn't select a choice.",
+            },
+        )
 
     Choice.objects.filter(pk=choice.pk).update(votes=F("votes") + 1)
     return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))

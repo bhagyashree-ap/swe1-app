@@ -1,5 +1,8 @@
 # PollApp
 
+[![Build Status](https://travis-ci.com/bhagyashree-ap/swe1-app.svg?branch=main)](https://travis-ci.com/bhagyashree-ap/swe1-app)
+[![Coverage Status](https://coveralls.io/repos/github/bhagyashree-ap/swe1-app/badge.svg?branch=main)](https://coveralls.io/github/bhagyashree-ap/swe1-app?branch=main)
+
 Built PollApp with Django. It lets users view polls, vote and see results. Admin can add and manage polls through the admin page.
 
 ## Tech stack
@@ -30,3 +33,14 @@ Open <http://127.0.0.1:8000/admin/> to add questions and choices.
 ## Deployment
 
 PollApp is deployed on AWS Elastic Beanstalk. The deployed app uses a separate database from the local app.
+
+Travis CI runs Black, Flake8, and the Django test suite on pushes and pull requests. Successful builds on `main` deploy to Elastic Beanstalk. Enable the `bhagyashree-ap/swe1-app` repository in Travis CI and Coveralls, then configure these Travis environment variables for deployment:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_DEFAULT_REGION` (currently `us-west-2`)
+- `EB_APPLICATION_NAME` (currently `swe1-app`)
+- `EB_ENVIRONMENT_NAME` (currently `pollapp-env`)
+- `EB_S3_BUCKET` (the Elastic Beanstalk source bundle bucket in the same AWS region)
+
+After the first Travis build, protect the `main` branch in GitHub and require the Travis CI status check to pass before merging.

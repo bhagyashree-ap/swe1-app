@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
+
 import os
 import dj_database_url
 from pathlib import Path
@@ -21,7 +22,7 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    ".elasticbeanstalk.com",   # covers your EB domain
+    ".elasticbeanstalk.com",  # covers your EB domain
 ]
 extra_hosts = os.environ.get("ALLOWED_HOSTS", "")
 ALLOWED_HOSTS += [host.strip() for host in extra_hosts.split(",") if host.strip()]
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",   # add this line right after SecurityMiddleware
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -84,6 +85,9 @@ DATABASES = {
 TIME_ZONE = "America/New_York"
 USE_TZ = True
 
-CSRF_TRUSTED_ORIGINS = ["https://*.elasticbeanstalk.com", "http://*.elasticbeanstalk.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.elasticbeanstalk.com",
+    "http://*.elasticbeanstalk.com",
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

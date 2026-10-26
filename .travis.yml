@@ -1,0 +1,33 @@
+language: python
+python:
+  - "3.12"
+
+services:
+  - postgresql
+
+install:
+  - python -m pip install --upgrade pip
+  - pip install -r requirements.txt
+
+before_script:
+  - psql -c 'CREATE DATABASE pollapp_test;' -U postgres
+
+script:
+  - black --check .
+  - flake8 .
+  - coverage run --source=polls manage.py test
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  region: "$AWS_DEFAULT_REGION"
+  app: "$EB_APPLICATION_NAME"
+  env: "$EB_ENVIRONMENT_NAME"
+  bucket_name: "$EB_S3_BUCKET"
+  on:
+    branch: main
+    repo: bhagyashree-ap/swe1-app
