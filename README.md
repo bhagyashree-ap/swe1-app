@@ -8,7 +8,7 @@ Built PollApp with Django. It lets users view polls, vote and see results. Admin
 ## Tech stack
 
 - Python 3.12
-- Django 6.1
+- Django 5.2 LTS
 - SQLite
 - AWS Elastic Beanstalk
 - Gunicorn and WhiteNoise
