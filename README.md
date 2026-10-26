@@ -38,9 +38,8 @@ Travis CI runs Black, Flake8, and the Django test suite on pushes and pull reque
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
-- `AWS_DEFAULT_REGION` (currently `us-west-2`)
-- `EB_APPLICATION_NAME` (currently `swe1-app`)
-- `EB_ENVIRONMENT_NAME` (currently `pollapp-env`)
-- `EB_S3_BUCKET` (the Elastic Beanstalk source bundle bucket in the same AWS region)
+- `COVERALLS_REPO_TOKEN` (from Coveralls)
+
+The Elastic Beanstalk region, application, environment, and S3 bucket are configured in `.travis.yml`.
 
 After the first Travis build, protect the `main` branch in GitHub and require the Travis CI status check to pass before merging.

@@ -18,10 +18,11 @@ deploy:
   provider: elasticbeanstalk
   access_key_id: "$AWS_ACCESS_KEY_ID"
   secret_access_key: "$AWS_SECRET_ACCESS_KEY"
-  region: "$AWS_DEFAULT_REGION"
-  app: "$EB_APPLICATION_NAME"
-  env: "$EB_ENVIRONMENT_NAME"
-  bucket: "$EB_S3_BUCKET"
+  region: us-west-2
+  app: swe1-app
+  env: pollapp-env
+  bucket: elasticbeanstalk-us-west-2-764565585211
+  wait_until_deployed: true
   edge: true
   on:
     branch: main
