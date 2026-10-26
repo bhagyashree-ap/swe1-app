@@ -5,18 +5,15 @@ python:
 services:
   - postgresql
 
-addons:
-  apt:
-    packages:
-      - libsqlite3-0
-
 install:
   - python -m pip install --upgrade pip
   - pip install -r requirements.txt
-  - pip install pysqlite3-binary
 
 before_script:
   - psql -c 'CREATE DATABASE pollapp_test;' -U postgres
+
+env:
+  - DATABASE_URL=postgres://postgres@localhost/pollapp_test
 
 script:
   - black --check .

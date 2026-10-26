@@ -14,13 +14,6 @@ import os
 import dj_database_url
 from pathlib import Path
 
-# Travis provides an older system SQLite library; use the bundled modern build there.
-if os.environ.get("TRAVIS") == "true":
-    import pysqlite3
-    import sys
-
-    sys.modules["sqlite3"] = pysqlite3
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-only-insecure-key-change-me")
