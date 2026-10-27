@@ -12,7 +12,13 @@ script:
   - coverage run --source=polls manage.py test
 
 after_success:
-  - COVERALLS_GIT_BRANCH="$TRAVIS_BRANCH" coveralls
+  - >-
+    COVERALLS_SERVICE_NAME=travis-ci
+    COVERALLS_GIT_BRANCH="$TRAVIS_BRANCH"
+    COVERALLS_GIT_COMMIT="$TRAVIS_COMMIT"
+    COVERALLS_SERVICE_NUMBER="$TRAVIS_BUILD_NUMBER"
+    COVERALLS_SERVICE_JOB_ID="$TRAVIS_JOB_ID"
+    coveralls
 
 deploy:
   provider: elasticbeanstalk
