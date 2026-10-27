@@ -8,38 +8,11 @@ Built PollApp with Django. It lets users view polls, vote and see results. Admin
 ## Tech stack
 
 - Python 3.12
-- Django 5.2 LTS
+- Django 5.2
 - SQLite
 - AWS Elastic Beanstalk
-- Gunicorn and WhiteNoise
-
-## Run locally
-
-From the project folder, run:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-python -m pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
-```
-
-Open <http://127.0.0.1:8000/polls/> to view polls.
-
-Open <http://127.0.0.1:8000/admin/> to add questions and choices.
-
-## Deployment
-
-PollApp is deployed on AWS Elastic Beanstalk. The deployed app uses a separate database from the local app.
-
-Travis CI runs Black, Flake8, and the Django test suite on pushes and pull requests. Successful builds on `main` deploy to Elastic Beanstalk. Enable the `bhagyashree-ap/swe1-app` repository in Travis CI and Coveralls, then configure these Travis environment variables for deployment:
-
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `COVERALLS_REPO_TOKEN` (from Coveralls)
-
-The Elastic Beanstalk region, application, environment, and S3 bucket are configured in `.travis.yml`.
-
-After the first Travis build, protect the `main` branch in GitHub and require the Travis CI status check to pass before merging.
+- Gunicorn and WhiteNoise for serving the app and static files
+- Amazon S3 for Elastic Beanstalk deployment bundles
+- Travis CI for CI/CD
+- Black and Flake8 for formatting and lint checks
+- Django tests with coverage.py and Coveralls
