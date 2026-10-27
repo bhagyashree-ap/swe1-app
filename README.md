@@ -1,7 +1,7 @@
 # PollApp
 
 [![Build Status](https://app.travis-ci.com/bhagyashree-ap/swe1-app.svg?branch=main)](https://app.travis-ci.com/bhagyashree-ap/swe1-app)
-[![Coverage Status](https://coveralls.io/repos/github/bhagyashree-ap/swe1-app/badge.svg?branch=main)](https://coveralls.io/github/bhagyashree-ap/swe1-app?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/bhagyashree-ap/swe1-app/badge.svg)](https://coveralls.io/github/bhagyashree-ap/swe1-app)
 
 Built PollApp with Django. It lets users view polls, vote and see results. Admin can add and manage polls through the admin page.
 
