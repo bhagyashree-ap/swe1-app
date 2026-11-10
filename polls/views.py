@@ -66,3 +66,5 @@ def vote(request, question_id):
 
     Choice.objects.filter(pk=choice.pk).update(votes=F("votes") + 1)
     return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+import os
+x=[1,2,3]
